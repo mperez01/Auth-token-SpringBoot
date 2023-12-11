@@ -23,7 +23,7 @@ public class SecurityConfiguration {
   private final AuthenticationProvider authenticationProvider;
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             authz -> {
@@ -31,8 +31,8 @@ public class SecurityConfiguration {
               authz.anyRequest().authenticated();
             })
         .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authenticationProvider(authenticationProvider)
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        .authenticationProvider(this.authenticationProvider)
+        .addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
         .httpBasic(AbstractHttpConfigurer::disable);
 

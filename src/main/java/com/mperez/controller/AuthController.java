@@ -21,13 +21,13 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<AuthenticationResponse> login(
-      @Validated @RequestBody LoginRequest loginRequest) {
-    return ResponseEntity.ok(authenticationService.login(loginRequest));
+      @Validated @RequestBody final LoginRequest loginRequest) {
+    return ResponseEntity.ok(this.authenticationService.login(loginRequest));
   }
 
   @PostMapping("/register")
   public ResponseEntity<AuthenticationResponse> register(
-      @Validated @RequestBody RegisterRequest registerRequest) {
-    return ResponseEntity.ok(authenticationService.register(registerRequest));
+      @Validated @RequestBody final RegisterRequest registerRequest) {
+    return ResponseEntity.ok(this.authenticationService.register(registerRequest));
   }
 }
