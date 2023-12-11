@@ -18,24 +18,24 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final JwtAuthenticationFilter jwtAuthFilter;
+  private final JwtAuthenticationFilter jwtAuthFilter;
 
-    private final AuthenticationProvider authenticationProvider;
+  private final AuthenticationProvider authenticationProvider;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authz -> {
-                    authz.requestMatchers("/v1/login", "/v1/register", "/h2-console/**").permitAll();
-                    authz.anyRequest().authenticated();
-                })
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                .httpBasic(AbstractHttpConfigurer::disable);
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(
+            authz -> {
+              authz.requestMatchers("/v1/login", "/v1/register", "/h2-console/**").permitAll();
+              authz.anyRequest().authenticated();
+            })
+        .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authenticationProvider(authenticationProvider)
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        .headers(x -> x.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+        .httpBasic(AbstractHttpConfigurer::disable);
 
-        return http.build();
-    }
-
+    return http.build();
+  }
 }
