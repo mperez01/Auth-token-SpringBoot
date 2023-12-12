@@ -9,11 +9,11 @@ import java.time.LocalDate;
 @Builder
 public class UserDto {
 
-    private String email;
-    
-    private String name;
+  private String email;
 
-    private String lastname;
+  private String name;
 
-    private LocalDate birthday;
+  private String lastname;
+
+  private LocalDate birthday;
 }

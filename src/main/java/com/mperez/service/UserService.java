@@ -9,15 +9,15 @@ import java.security.Principal;
 
 @Service
 public class UserService {
-    
-    public UserDto getUserInfo(Principal connectedUser) {
-        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
-        
-        return UserDto.builder()
-                .name(user.getName())
-                .lastname(user.getLastname())
-                .email(user.getEmail())
-                .birthday(user.getBirthday())
-                .build();
-    }
+
+  public UserDto getUserInfo(final Principal connectedUser) {
+    final var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+
+    return UserDto.builder()
+        .name(user.getName())
+        .lastname(user.getLastname())
+        .email(user.getEmail())
+        .birthday(user.getBirthday())
+        .build();
+  }
 }

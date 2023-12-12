@@ -15,11 +15,10 @@ import java.security.Principal;
 @RequestMapping("/v1")
 public class UserController {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    @GetMapping("/user")
-    public ResponseEntity<UserDto> getUser(Principal connectedUser) {
-        return ResponseEntity.ok(userService.getUserInfo(connectedUser));
-    }
-
+  @GetMapping("/user")
+  public ResponseEntity<UserDto> getUser(final Principal connectedUser) {
+    return ResponseEntity.ok(this.userService.getUserInfo(connectedUser));
+  }
 }
